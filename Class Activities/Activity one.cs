@@ -1,65 +1,33 @@
 ﻿using System;
-public interface IEmployee
+public interface IPlayable
 {
-    string GetEmployeeName();
-    int GetEmployeeID();
-    double GetSalary();
+    void Play();
 }
-
-public interface IDepartment
+public class Guitar : IPlayable
 {
-    string GetDepartmentName();
-    string GetHOP(); 
+    // Explicit implementation of IPlayable interface
+    void IPlayable.Play()
+    {
+        Console.WriteLine("Playing the guitar...");
+    }
 }
-public class Employee : IEmployee, IDepartment
+public class Piano : IPlayable
 {
-    private string name;
-    private int employeeID;
-    private double salary;
-    private string departmentName;
-    private string hopName;
-    public Employee(string name, int employeeID, double salary, string departmentName, string hopName)
+    // Explicit implementation of IPlayable interface
+    void IPlayable.Play()
     {
-        this.name = name;
-        this.employeeID = employeeID;
-        this.salary = salary;
-        this.departmentName = departmentName;
-        this.hopName = hopName;
-    }
-    
-    public string GetEmployeeName()
-    {
-        return name;
-    }
-    public int GetEmployeeID()
-    {
-        return employeeID;
-    }
-    public double GetSalary()
-    {
-        return salary;
-    }
-    
-    public string GetDepartmentName()
-    {
-        return departmentName;
-    }
-    public string GetHOP()
-    {
-        return hopName;
+        Console.WriteLine("Playing the piano...");
     }
 }
 class Program
 {
     static void Main(string[] args)
     {
-        
-        Employee employee = new Employee("John Doe", 12345, 50000, "Finance", "Alice Smith");
-        
-        Console.WriteLine($"Employee Name: {employee.GetEmployeeName()}");
-        Console.WriteLine($"Employee ID: {employee.GetEmployeeID()}");
-        Console.WriteLine($"Salary: {employee.GetSalary()}");
-        Console.WriteLine($"Department: {employee.GetDepartmentName()}");
-        Console.WriteLine($"Head of Department: {employee.GetHOP()}");
+        // Creating Guitar and Piano objects
+        Guitar guitar = new Guitar();
+        Piano piano = new Piano();
+        // Calling Play method on Guitar and Piano objects
+        ((IPlayable)guitar).Play(); // Explicitly cast to IPlayable interface
+        ((IPlayable)piano).Play(); // Explicitly cast to IPlayable interface
     }
 }
